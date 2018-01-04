@@ -38,9 +38,9 @@
 		<form class="form-horizontal" action="../../../Warsztat_samochodowy/ModifyVehicle" method="post">
 		
 			<div class="form-group">
-				<label for="inputId" class="col-sm-2 control-label">Id</label>
+				<label class="col-sm-2 control-label">Id</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="disableInputId" name ="id" value = "${vehicle.idVehicle}" readonly>
+					<input type="text" class="form-control" name ="idVehicle" value = "${vehicle.idVehicle}" readonly>
 					<span id="helpBlock" class="help-block">[brak możliwości edycji]</span>
 				</div>
 			</div>
@@ -66,8 +66,8 @@
 				<label for="inputProductionYear" class="col-sm-2 control-label">Rok produkcji</label>
 				<div class="col-sm-10">
 					<input type="number" class="form-control" id="inputProductionYear" name = "productionYear" 
-					value = "${vehicle.productionYear}" placeholder = "2000" 
-					pattern="^(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|[2-9][0-9])[0-9]{2}$" required>
+					placeholder = "2000" pattern="^(0[1-9]|1[012])[/](0[1-9]|[12][0-9]|3[01])[/](19|[2-9][0-9])[0-9]{2}$" 
+					value = "${vehicle.productionYear}" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 			</div>
@@ -75,8 +75,8 @@
 			<div class="form-group">
 				<label for="inputRegistrationNr" class="col-sm-2 control-label">Numer rejestracyjny</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputRegistrationNr" placeholder="PKN8956" name="registrationNr" 
-					value = "${vehicle.registrationNr}" required>
+					<input type="text" class="form-control" id="inputRegistrationNr" placeholder="PKN8956" 
+					name="registrationNr" pattern = "[A-Z]{2}[A-Z0-9]{5}" value = "${vehicle.registrationNr}" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 			</div>
@@ -84,13 +84,29 @@
 			<div class="form-group">
 				<label for="inputNextTechnicalReviewDate" class="col-sm-2 control-label">Data następnego przeglądu technicznego</label>
 				<div class="col-sm-10">
-					<input type="date" class="form-control" id="inputNextTechnicalReviewDate" placeholder="YYYY-MM-DD" 
+					<input type="text" class="form-control" id="inputNextTechnicalReviewDate" placeholder="YYYY-MM-DD" 
 					name = "nextTechnicalReviewDate" value = "${vehicle.nextTechnicalReviewDate}"
 					pattern = "(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))">
 					<span id="helpBlock" class="help-block">[pole opcjonalne]</span>
 				</div>
 			</div>
 			
+			<div class="form-group">
+				<label for="inputCutomerId" class="col-sm-2 control-label">Id klienta</label>
+				<div class="col-sm-10">
+					<select name = "customerId" value = "${vehicle.customerId}" required>
+						<c:forEach items="${customers}" var="customer">
+							<option value="${customer.idCustomer}"
+									<c:if test="${customer.idCustomer==vehicle.customerId}">selected</c:if>>
+										id: ${customer.idCustomer} |  
+										imię: ${customer.name} | 
+										nazwisko: ${customer.surname}.
+							</option>	
+						</c:forEach>
+					</select>		
+					<span id="helpBlock" class="help-block">[pole wymagane]</span>
+				</div>
+			</div>			
 				
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">

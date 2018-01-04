@@ -29,55 +29,39 @@
 </head>
 
 <body>
-	<div class="panel panel-primary">
-		<br />
-		
-		<h4>Zmodyfikuj dane klienta. </h4>
-		<h5>Obecne dane zostały wpisane do odpowiednich pól formularza. </h5><br/>
+	<br/>
+	&emsp;&emsp;<h4>W tabeli znajduje się lista wszystkich samochodów następującego klienta:</h4>
+	&emsp;<label> id <input value = "${customer.getIdCustomer()}" readonly></label>
+	&emsp;<label> imię <input value = "${customer.getName()}" readonly></label>
+	&emsp;<label> nazwisko <input value = "${customer.getSurname()}" readonly></label><br/><br/>
 
-		<form class="form-horizontal" action="../../../Warsztat_samochodowy/ModifyCustomer" method="post">
-		
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Id</label>
-				<div class="col-sm-10">
-					<input type="number" class="form-control" name ="idCustomer" value = "${customer.idCustomer}" readonly>
-					<span id="helpBlock" class="help-block">[brak możliwości edycji]</span>
-				</div>
-			</div>
-		
-			<div class="form-group">
-				<label for="inputName" class="col-sm-2 control-label">Imię</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputName" name ="name" value = "${customer.name}" required>
-					<span id="helpBlock" class="help-block">[pole wymagane]</span>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label for="inputSurname" class="col-sm-2 control-label">Nazwisko</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputSurname" name="surname" value = "${customer.surname}" required>
-					<span id="helpBlock" class="help-block">[pole wymagane]</span>
-				</div>
-			</div>
-			
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Data urodzenia</label>
-				<div class="col-sm-10">
-					<input type="text" class="form-control" name = "birthDay" value = "${customer.birthDay}" placeholder="YYYY-MM-DD" 
-					pattern = "(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))">
-					<span id="helpBlock" class="help-block">[pole opcjonalne]</span>
-				</div>
-			</div>
-				
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default">Zmień</button>
-				</div>
-			</div>
-		</form>
-
-
+		<div class="panel panel-primary">
+			<!-- Table -->
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>id</th>
+						<th>Model</th>
+						<th>Marka</th>
+						<th>Rok produkcji</th>
+						<th>Numer rejestracyjny</th>
+						<th>Data następnego przeglądu technicznego</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${vehicles}" var="vehicle">
+						<tr>
+							<th>${vehicle.idVehicle}</th>
+							<td>${vehicle.model}</td>
+							<td>${vehicle.mark}</td>
+							<td>${vehicle.productionYear}</td>
+							<td>${vehicle.registrationNr}</td>
+							<td>${vehicle.nextTechnicalReviewDate}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<!-- ------------------------------------------------------------------------------------------------------------------------ -->
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -65,7 +65,7 @@
 			<div class="form-group">
 				<label for="inputRegistrationNr" class="col-sm-2 control-label">Numer rejestracyjny</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputRegistrationNr" placeholder="PKN8956" name="registrationNr" required>
+					<input type="text" class="form-control" id="inputRegistrationNr" placeholder="PKN8956" name="registrationNr" pattern = "[A-Z]{2}[A-Z0-9]{5}" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 			</div>
@@ -73,12 +73,27 @@
 			<div class="form-group">
 				<label for="inputNextTechnicalReviewDate" class="col-sm-2 control-label">Data następnego przeglądu technicznego</label>
 				<div class="col-sm-10">
-					<input type="date" class="form-control" id="inputNextTechnicalReviewDate" placeholder="YYYY-MM-DD" 
+					<input type="text" class="form-control" id="inputNextTechnicalReviewDate" placeholder="YYYY-MM-DD" 
 					name = "nextTechnicalReviewDate" pattern = "(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))">
 					<span id="helpBlock" class="help-block">[pole opcjonalne]</span>
 				</div>
 			</div>
-
+			
+			<div class="form-group">
+				<label for="inputCutomerId" class="col-sm-2 control-label">Id klienta</label>
+				<div class="col-sm-10">
+					<select name = "customerId" required>
+						<c:forEach items="${customers}" var="customer">
+							<option value="${customer.idCustomer}">
+									id: ${customer.idCustomer} |  
+									imię: ${customer.name} | 
+									nazwisko: ${customer.surname}.
+							</option>	
+						</c:forEach>
+					</select>
+					<span id="helpBlock" class="help-block">[pole wymagane]</span>
+				</div>
+			</div>
 				
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">

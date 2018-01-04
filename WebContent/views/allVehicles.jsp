@@ -41,9 +41,10 @@
 						<th>#</th>
 						<th>Model</th>
 						<th>Marka</th>
-						<th>rok produkcji</th>
+						<th>Rok produkcji</th>
 						<th>Numer rejestracyjny</th>
 						<th>Data kolejnego przeglądu technicznego</th>
+						<th>Id klienta</th>
 						<th>Akcja</th>
 					</tr>
 				</thead>
@@ -56,6 +57,7 @@
 							<td>${vehicle.productionYear}</td>
 							<td>${vehicle.registrationNr}</td>
 							<td>${vehicle.nextTechnicalReviewDate}</td>
+							<td>${vehicle.customerId}</td>
 							<td>
 								<a href='<c:url value = '/DeleteVehicle?idVehicle=${vehicle.idVehicle}'/>'>usuń</a>
 								<a href='<c:url value = '/ModifyVehicle?idVehicle=${vehicle.idVehicle}'/>'>edytuj</a>

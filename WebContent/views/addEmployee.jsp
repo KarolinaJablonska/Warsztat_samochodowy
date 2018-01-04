@@ -73,7 +73,7 @@
 			<div class="form-group">
 				<label for="inputManHour" class="col-sm-2 control-label">Koszt rb/h [zł/h]</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" id="inputManHour" name = "manHour" min = "1.00" max = "9000.00" placeholder = "12.00" required>
+					<input type="number" step="0.01" class="form-control" id="inputManHour" name = "manHour" min = "1.00" max = "9000.00" placeholder = "12,00" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 			</div>

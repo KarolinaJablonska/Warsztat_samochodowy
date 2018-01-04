@@ -9,14 +9,14 @@
 
  
 <ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="./views/index.jsp">Strona główna</a></li> 
+  <li role="presentation" class="active"><a href="../../Warsztat_samochodowy/views/index.jsp">Strona główna</a></li> 
 
   <!-- Rozwijalne menu Klienci -->
   <li class="dropdown, active">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Klienci<span class="caret"></span></a>
 		    <ul class="dropdown-menu">
 		      <li><a href="../../../Warsztat_samochodowy/AllCustomers">Lista wszystkich klientów</a></li>
-		      <li><a href="./views/addCustomer.jsp">Dodaj nowego klienta</a></li>
+		      <li><a href="../../Warsztat_samochodowy/views/addCustomer.jsp">Dodaj nowego klienta</a></li>
 		    </ul>
 	 </li>
   
@@ -26,7 +26,7 @@
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pracownicy<span class="caret"></span></a>
 		    <ul class="dropdown-menu">
 		      <li><a href="../../../Warsztat_samochodowy/AllEmployees">Lista wszystkich pracowników</a></li>
-		      <li><a href="./views/addEmployee.jsp">Dodaj nowego pracownika</a></li>
+		      <li><a href="../../Warsztat_samochodowy/views/addEmployee.jsp">Dodaj nowego pracownika</a></li>
 		    </ul>
 	 </li>
   
@@ -36,7 +36,7 @@
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Samochody<span class="caret"></span></a>
 		    <ul class="dropdown-menu">
 		      <li><a href="../../../Warsztat_samochodowy/AllVehicles">Lista wszystkich samochodów</a></li>
-		      <li><a href="./views/addVehicle.jsp">Dodaj nowy samochód</a></li>
+		      <li><a href="../../../Warsztat_samochodowy/SupportValuesToForms?action=addVehicle">Dodaj nowy samochód</a></li>
 		    </ul>
  </li>
   
@@ -45,7 +45,7 @@
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Zlecenia<span class="caret"></span></a>
 		    <ul class="dropdown-menu">
 		      <li><a href="../../../Warsztat_samochodowy/AllOrders">Lista wszystkich zleceń</a></li>
-		      <li><a href="../../../Warsztat_samochodowy/ValuesToOrderForm">Dodaj nowe zlecenie</a></li>
+		      <li><a href="../../../Warsztat_samochodowy/SupportValuesToForms?action=addOrder">Dodaj nowe zlecenie</a></li>
 		    </ul>
  </li>
   

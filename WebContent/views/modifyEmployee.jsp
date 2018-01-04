@@ -40,7 +40,7 @@
 			<div class="form-group">
 				<label for="inputId" class="col-sm-2 control-label">Id</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="disableInputId" name ="id" value = "${employee.idEmployee}" readonly>
+					<input type="text" class="form-control" id="disableInputId" name ="idEmployee" value = "${employee.idEmployee}" readonly>
 					<span id="helpBlock" class="help-block">[brak możliwości edycji]</span>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 			<div class="form-group">
 				<label for="inputName" class="col-sm-2 control-label">Imię</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputName" name ="name" value="${employee.name}" required>
+					<input type="text" class="form-control" id="inputName" name ="name" value = "${employee.name}" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 				
@@ -57,7 +57,7 @@
 			<div class="form-group">
 				<label for="inputSurname" class="col-sm-2 control-label">Nazwisko</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputSurname" name="surname" value="${employee.surname}" required>
+					<input type="text" class="form-control" id="inputSurname" name="surname" value = "${employee.surname}" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 			</div>
@@ -66,7 +66,7 @@
 				<label for="inputPhone" class="col-sm-2 control-label">Telefon komórkowy</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="inputPhone" placeholder="000-000-000" 
-					name = "phone" pattern = "[0-9]{3}-[0-9]{3}-[0-9]{3}" value="${employee.phone}" required>
+					name = "phone" pattern = "[0-9]{3}-[0-9]{3}-[0-9]{3}" value = "${employee.phone}" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 			</div>
@@ -74,7 +74,7 @@
 			<div class="form-group">
 				<label for="inputNote" class="col-sm-2 control-label">Notatka</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputNote" name = "note" value="${employee.note}">
+					<input type="text" class="form-control" id="inputNote" name = "note" value = "${employee.note}">
 					<span id="helpBlock" class="help-block">[pole opcjonalne]</span>
 				</div>
 			</div>
@@ -82,8 +82,8 @@
 			<div class="form-group">
 				<label for="inputManHour" class="col-sm-2 control-label">Koszt rb/h [zł/h]</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" id="inputManHour" name = "manHour" min = "1.00" 
-					max = "9000.00" placeholder = "12.00" value="${employee.manHour}" required>
+					<input type="number" step="0.01" class="form-control" id="inputManHour" name = "manHour" min = "1.00" 
+					max = "9000.00" placeholder = "12,00" value = "${employee.manHour}" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 			</div>
@@ -92,7 +92,7 @@
 				<label for="inputStreet" class="col-sm-2 control-label">Adres: ulica</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="inputStreet" name = "street" 
-					placeholder = "Lokalna 00/00" value="${employee.street}" required>
+					placeholder = "Lokalna 00/00" value = "${employee.street}" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 			</div>
@@ -101,7 +101,7 @@
 				<label for="inputPostalCode" class="col-sm-2 control-label">Adres: kod pocztowy</label>
 				<div class="col-sm-10">
 					<input type="text" class="form-control" id="inputPostalCode" name = "postalCode" 
-					placeholder = "00-000" pattern = "[0-9]{2}-[0-9]{3}" value="${employee.postalCode}"required>
+					placeholder = "00-000" pattern = "[0-9]{2}-[0-9]{3}"  value = "${employee.postalCode}" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 			</div>
@@ -109,7 +109,7 @@
 			<div class="form-group">
 				<label for="inputCity" class="col-sm-2 control-label">Adres: miasto</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" id="inputCity" name = "city" value="${employee.city}" required>
+					<input type="text" class="form-control" id="inputCity" name = "city" value = "${employee.city}" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 			</div>

@@ -41,48 +41,28 @@ public class ModifyCustomer extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		// MESSAGES
+		// MESSAGE
 		String SUCCESS_MESSAGE = "<div class=\"alert alert-success alert-dismissable\">\n"
 				+ "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>\n"
-				+ "  Dane o kliencie zostały zmodyfikowane poprawie.\n" + "</div>";
-
-		String FORM_NOT_FILLED = "<div class=\"alert alert-danger alert-dismissable\">\n"
-				+ "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>\n"
-				+ "  Dane nie zostały zmienione - niepoprawnie wypełniony formularz. \n" + "</div>";
-
-		String WRONG_DATA = "<div class=\"alert alert-danger alert-dismissable\">\n"
-				+ "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>\n"
-				+ "  Dane nie zostały zmienione - błędnie podana data urodzin w formularzu. \n" + "</div>";
+				+ "  Klient został dodany poprawnie.\n" + "</div>";
 
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
 		CustomerDao dao = new CustomerDao();
 		List<Customer> customers;
-		boolean isBirthDayOk;
 
+		int idCustomer = Integer.parseInt(request.getParameter("idCustomer"));
 		String name = request.getParameter("name");
 		String surname = request.getParameter("surname");
 		String birthDay = request.getParameter("birthDay");
-		int idCustomer = Integer.parseInt(request.getParameter("idCustomer"));
 
-		// checking if date of birth is correct
+		// setting empty data suitable to Data Base input
 		if (birthDay.equals("")) {
 			birthDay = null;
-			isBirthDayOk = true;
-		} else if (birthDay.matches(".*[a-żA-Ż]+.*")) {
-			isBirthDayOk = false;
-			request.setAttribute("message", WRONG_DATA);
-		} else {
-			isBirthDayOk = true;
 		}
 
-		// checking if name and surname are not empty
-		if (!name.isEmpty() && !surname.isEmpty() && isBirthDayOk == true) {
-			dao.saveToDb(idCustomer, name, surname, birthDay);
-			request.setAttribute("message", SUCCESS_MESSAGE);
-		} else if (name.isEmpty() || surname.isEmpty()) {
-			request.setAttribute("message", FORM_NOT_FILLED);
-		}
+		dao.saveToDb(idCustomer, name, surname, birthDay);
+		request.setAttribute("message", SUCCESS_MESSAGE);
 
 		customers = dao.loadAll();
 		request.setAttribute("customers", customers);

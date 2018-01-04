@@ -13,8 +13,8 @@ import pl.coderslab.model.Vehicle;
 public class VehicleDao {
 
 	private static final String LOAD_ALL_VEHICLES = "SELECT * FROM Vehicle";
-	private static final String SAVE_NEW = "INSERT INTO Vehicle(model, mark, productionYear, registrationNr, nextTechnicalReviewDate) VALUES (?,?,?,?,?)";
-	private static final String UPDATE_BY_ID = "UPDATE Vehicle SET model=?, mark=?, productionYear=?, registrationNr=?, nextTechnicalReviewDate=? WHERE idVehicle=?";
+	private static final String SAVE_NEW = "INSERT INTO Vehicle(model, mark, productionYear, registrationNr, nextTechnicalReviewDate, customerId) VALUES (?,?,?,?,?,?)";
+	private static final String UPDATE_BY_ID = "UPDATE Vehicle SET model=?, mark=?, productionYear=?, registrationNr=?, nextTechnicalReviewDate=?, customerId=?  WHERE idVehicle=?";
 	private static final String DELETE_ONE_BY_ID = "DELETE FROM Vehicle where idVehicle=?";
 
 	/**
@@ -39,11 +39,12 @@ public class VehicleDao {
 				v.setProductionYear(rs.getInt("productionYear"));
 				v.setRegistrationNr(rs.getString("registrationNr"));
 				v.setNextTechnicalReviewDate(rs.getString("nextTechnicalReviewDate"));
+				v.setCustomerId(rs.getInt("customerId"));
 				vehicles.add(v);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			System.out.println("Coś nie tak :(");
+			System.out.println("Błąd.");
 		}
 		return vehicles;
 	}
@@ -56,9 +57,10 @@ public class VehicleDao {
 	 * @param productionYear
 	 * @param registrationNr
 	 * @param nextTechnicalReviewDate
+	 * @param customerId
 	 */
 	public void saveToDb(int idVehicle, String model, String mark, int productionYear, String registrationNr,
-			String nextTechnicalReviewDate) {
+			String nextTechnicalReviewDate, int customerId) {
 		if (idVehicle == 0) {
 			try (Connection conn = DbUtil.getConnection()) {
 				String[] generatedColumns = { "id" };
@@ -68,6 +70,7 @@ public class VehicleDao {
 				statement.setInt(3, productionYear);
 				statement.setString(4, registrationNr);
 				statement.setString(5, nextTechnicalReviewDate);
+				statement.setInt(6, customerId);
 				statement.executeUpdate();
 				ResultSet rs = statement.getGeneratedKeys();
 				if (rs.next()) {
@@ -85,7 +88,8 @@ public class VehicleDao {
 				statement.setInt(3, productionYear);
 				statement.setString(4, registrationNr);
 				statement.setString(5, nextTechnicalReviewDate);
-				statement.setInt(6, idVehicle);
+				statement.setInt(6, customerId);
+				statement.setInt(7, idVehicle);
 				statement.executeUpdate();
 			} catch (SQLException e) {
 				System.err.println(e.getMessage());

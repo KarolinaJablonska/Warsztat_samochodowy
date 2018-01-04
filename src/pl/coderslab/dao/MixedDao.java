@@ -13,7 +13,7 @@ import pl.coderslab.model.Vehicle;
 
 public class MixedDao {
 
-	private static final String LOAD_CUSTOMERS_ALL_VEHICLES = "SELECT * FROM Customer JOIN Vehicle ON Customer.idCustomer=Vehicle.customer_id WHERE Customer.idCustomer=?";
+	private static final String LOAD_CUSTOMERS_ALL_VEHICLES = "SELECT * FROM Customer JOIN Vehicle ON Customer.idCustomer=Vehicle.customerId WHERE Customer.idCustomer=?";
 
 	
 	
@@ -42,6 +42,7 @@ public class MixedDao {
 				v.setProductionYear(rs.getInt("productionYear"));
 				v.setRegistrationNr(rs.getString("registrationNr"));
 				v.setNextTechnicalReviewDate(rs.getString("nextTechnicalReviewDate"));
+				v.setCustomerId(rs.getInt("customerId"));
 
 				customerAllVehicles.put(c, v);
 			}

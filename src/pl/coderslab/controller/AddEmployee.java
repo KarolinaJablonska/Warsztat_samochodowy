@@ -18,64 +18,35 @@ public class AddEmployee extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// MESSAGES
+		
+		// MESSAGE
 		String SUCCESS_MESSAGE = "<div class=\"alert alert-success alert-dismissable\">\n"
 				+ "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>\n"
 				+ "  Pracownik został dodany poprawnie.\n" + "</div>";
 
-		String INCORRECT_DATA_IN_FORM = "<div class=\"alert alert-danger alert-dismissable\">\n"
-				+ "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>\n"
-				+ "  Pracownik nie został dodany - błędnie wypełniony formularz. \n" + "</div>";
-
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
+		
 		EmployeeDao dao = new EmployeeDao();
 		List<Employee> employees;
-		boolean isPhoneOk, isManHourOk, isPostalCodeOk;
 
-		String name = request.getParameter("name");
-		String surname = request.getParameter("surname");
-		String phone = request.getParameter("phone");
-		String note = request.getParameter("note");
-		String street = request.getParameter("street");
-		String postalCode = request.getParameter("postalCode");
-		String city = request.getParameter("city");
-		double manHour;
+		String name = request.getParameter("name");								//required
+		String surname = request.getParameter("surname");						//required
+		String phone = request.getParameter("phone");							//required
+		String note = request.getParameter("note");	
+		double manHour= Double.parseDouble(request.getParameter("manHour"));	//required
+		String street = request.getParameter("street");							//required
+		String postalCode = request.getParameter("postalCode");					//required
+		String city = request.getParameter("city");								//required
 
-		// CHECKING IF DATAS ARE OK -> SETTING BOOLEANS
-		if (phone.length() == 11 && !phone.matches(".*[a-żA-Ż]+.*")) {
-			isPhoneOk = true;
-		} else {
-			isPhoneOk = false;
-			request.setAttribute("message", INCORRECT_DATA_IN_FORM);
+		//setting empty data suitable to Data Base input
+		if (note.equals("")) {
+			note = null;
 		}
 
-		try {
-			manHour = Double.parseDouble(request.getParameter("manHour"));
-			isManHourOk = true;
-		} catch (Exception e) {
-			manHour = 0.00;
-			isManHourOk = false;
-			request.setAttribute("message", INCORRECT_DATA_IN_FORM);
-		}
-
-		if (postalCode.length() == 6 && !postalCode.matches(".*[a-żA-Ż]+.*")) {
-			isPostalCodeOk = true;
-		} else {
-			isPostalCodeOk = false;
-			request.setAttribute("message", INCORRECT_DATA_IN_FORM);
-		}
-
-		// CHECKING IF NECESSARY DATAS WERE FILLED AND BOOLEANS ARE TRUE
-		if (!name.isEmpty() && !surname.isEmpty() && !phone.isEmpty() && !street.isEmpty() && !postalCode.isEmpty()
-				&& !city.isEmpty() && manHour != 0 && isManHourOk == true && isPhoneOk == true
-				&& isPostalCodeOk == true) {
-			dao.saveToDb(0, name, surname, phone, note, manHour, street, postalCode, city);
-			request.setAttribute("message", SUCCESS_MESSAGE);
-		} else {
-			request.setAttribute("message", INCORRECT_DATA_IN_FORM);
-		}
-
+		dao.saveToDb(0, name, surname, phone, note, manHour, street, postalCode, city);
+		request.setAttribute("message", SUCCESS_MESSAGE);
+	
 		employees = dao.loadAll();
 		request.setAttribute("employees", employees);
 		getServletContext().getRequestDispatcher("/views/allEmployees.jsp").forward(request, response);

@@ -42,7 +42,6 @@
 					<input type="text" class="form-control" id="inputName" name ="name" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
-				
 			</div>
 			
 			<div class="form-group">
@@ -54,10 +53,10 @@
 			</div>
 			
 			<div class="form-group">
-				<label for="inputbirthDay" class="col-sm-2 control-label">Data urodzenia</label>
+				<label class="col-sm-2 control-label">Data urodzenia</label>
 				<div class="col-sm-10">
-					<input type="date" class="form-control" id="inputbirthDay" placeholder="YYYY-MM-DD" 
-					name = "birthDay" pattern = "(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))">
+					<input type="text" class="form-control" name = "birthDay" placeholder="YYYY-MM-DD" 
+					pattern = "(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))">
 					<span id="helpBlock" class="help-block">[pole opcjonalne]</span>
 				</div>
 			</div>
@@ -67,6 +66,7 @@
 					<button type="submit" class="btn btn-default">Dodaj</button>
 				</div>
 			</div>
+			
 		</form>
 
 

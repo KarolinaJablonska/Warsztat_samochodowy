@@ -8,13 +8,14 @@ public class Vehicle {
 	private int productionYear;
 	private String registrationNr;
 	private String nextTechnicalReviewDate;
+	private int customerId;
 	
 	public Vehicle() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	public Vehicle(int id, String model, String mark, int productionYear, String registrationNr,
-			String nextTechnicalReviewDate) {
+			String nextTechnicalReviewDate, int customerId) {
 		super();
 		this.idVehicle = id;
 		this.model = model;
@@ -22,6 +23,7 @@ public class Vehicle {
 		this.productionYear = productionYear;
 		this.registrationNr = registrationNr;
 		this.nextTechnicalReviewDate = nextTechnicalReviewDate;
+		this.customerId = customerId;
 	}
 
 	public int getIdVehicle() {
@@ -71,4 +73,13 @@ public class Vehicle {
 	public void setNextTechnicalReviewDate(String nextTechnicalReviewDate) {
 		this.nextTechnicalReviewDate = nextTechnicalReviewDate;
 	}
+
+	public int getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
+	}
+	
 }

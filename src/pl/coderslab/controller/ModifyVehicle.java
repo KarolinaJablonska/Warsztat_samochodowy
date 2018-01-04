@@ -1,7 +1,6 @@
 package pl.coderslab.controller;
 
 import java.io.IOException;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import pl.coderslab.dao.CustomerDao;
 import pl.coderslab.dao.VehicleDao;
+import pl.coderslab.model.Customer;
 import pl.coderslab.model.Vehicle;
 
 @WebServlet("/ModifyVehicle")
@@ -20,7 +21,9 @@ public class ModifyVehicle extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		VehicleDao dao = new VehicleDao();
+		CustomerDao dao2 = new CustomerDao();
 		List<Vehicle> vehicles = dao.loadAll();
+		List<Customer> customers = dao2.loadAll();
 		Vehicle vehicleToModify;
 
 		int idVehicle = Integer.parseInt(request.getParameter("idVehicle"));
@@ -32,7 +35,8 @@ public class ModifyVehicle extends HttpServlet {
 				request.setAttribute("vehicle", vehicleToModify);
 			}
 		}
-
+		
+		request.setAttribute("customers", customers);
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
 		getServletContext().getRequestDispatcher("/views/modifyVehicle.jsp").forward(request, response);
@@ -45,65 +49,26 @@ public class ModifyVehicle extends HttpServlet {
 				+ "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>\n"
 				+ "  Samochód został dodany poprawnie.\n" + "</div>";
 
-		String INCORRECT_DATA_IN_FORM = "<div class=\"alert alert-danger alert-dismissable\">\n"
-				+ "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>\n"
-				+ "  Samochód nie został dodany - błędnie wypełniony formularz. \n" + "</div>";
-
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
 		VehicleDao dao = new VehicleDao();
 		List<Vehicle> vehicles;
-		boolean isProductionYearOk, isNextTechnicalReviewDateOk, isRegistrationNrOk;
 
-		String model = request.getParameter("model");
-		String mark = request.getParameter("mark");
-		String registrationNr = request.getParameter("registrationNr");
+		int idVehicle = Integer.parseInt(request.getParameter("idVehicle")); 				// required
+		String model = request.getParameter("model"); 										// required
+		String mark = request.getParameter("mark"); 										// required
+		int productionYear = Integer.parseInt(request.getParameter("productionYear")); 		// required
+		String registrationNr = request.getParameter("registrationNr"); 					// required
 		String nextTechnicalReviewDate = request.getParameter("nextTechnicalReviewDate");
-		int productionYear;
-		int idVehicle = Integer.parseInt(request.getParameter("idVehicle"));
+		int customerId = Integer.parseInt(request.getParameter("customerId")); 				// required
 
-		// CHECKING IF DATAS ARE OK -> SETTING BOOLEANS
-		try {
-			productionYear = Integer.parseInt(request.getParameter("productionYear"));
-			int year = Calendar.getInstance().get(Calendar.YEAR);
-
-			if (productionYear > 1900 && productionYear <= year) {
-				isProductionYearOk = true;
-			} else {
-				isProductionYearOk = false;
-				request.setAttribute("message", INCORRECT_DATA_IN_FORM);
-			}
-		} catch (Exception e) {
-			productionYear = 0000;
-			isProductionYearOk = false;
-			request.setAttribute("message", INCORRECT_DATA_IN_FORM);
-		}
-
-		if (registrationNr.length() == 7 && registrationNr.matches(".*[a-zA-Z0-9]+.*")) {
-			isRegistrationNrOk = true;
-		} else {
-			isRegistrationNrOk = false;
-			request.setAttribute("message", INCORRECT_DATA_IN_FORM);
-		}
-
+		// setting empty date suitable to Data Base input
 		if (nextTechnicalReviewDate.equals("")) {
 			nextTechnicalReviewDate = null;
-			isNextTechnicalReviewDateOk = true;
-		} else if (nextTechnicalReviewDate.matches(".*[a-żA-Ż]+.*")) {
-			isNextTechnicalReviewDateOk = false;
-			request.setAttribute("message", INCORRECT_DATA_IN_FORM);
-		} else {
-			isNextTechnicalReviewDateOk = true;
 		}
 
-		// CHECKING IF NECESSARY DATAS WERE FILLED AND BOOLEANS ARE TRUE
-		if (!model.isEmpty() && !mark.isEmpty() && productionYear != 0 && !registrationNr.isEmpty()
-				&& isProductionYearOk == true && isNextTechnicalReviewDateOk == true && isRegistrationNrOk == true) {
-			dao.saveToDb(idVehicle, model, mark, productionYear, registrationNr, nextTechnicalReviewDate);
-			request.setAttribute("message", SUCCESS_MESSAGE);
-		} else {
-			request.setAttribute("message", INCORRECT_DATA_IN_FORM);
-		}
+		dao.saveToDb(idVehicle, model, mark, productionYear, registrationNr, nextTechnicalReviewDate, customerId);
+		request.setAttribute("message", SUCCESS_MESSAGE);
 
 		vehicles = dao.loadAll();
 		request.setAttribute("vehicles", vehicles);
