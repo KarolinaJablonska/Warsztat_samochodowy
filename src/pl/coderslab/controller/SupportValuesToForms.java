@@ -25,7 +25,6 @@ public class SupportValuesToForms extends HttpServlet {
 		
 		String action = request.getParameter("action");
 		
-		
 		EmployeeDao dao1 = new EmployeeDao();
 		VehicleDao dao2 = new VehicleDao();
 		CustomerDao dao3 = new CustomerDao();

@@ -113,7 +113,7 @@ public class OrderDao {
 				statement.setDouble(10, costOfParts);
 				statement.setDouble(11, manHourCost);
 				statement.setDouble(12, manHourQuantity);
-				statement.setInt(9, idOrder);
+				statement.setInt(13, idOrder);
 				statement.executeUpdate();
 			} catch (SQLException e) {
 				System.err.println(e.getMessage());

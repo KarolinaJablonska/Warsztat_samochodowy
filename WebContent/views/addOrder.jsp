@@ -39,7 +39,9 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Data przyjęcia do naprawy</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name ="acceptanceForRepairDate" required>
+					<input type="text" class="form-control" placeholder = "YYYY-MM-DD"
+					pattern = "(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+					name ="acceptanceForRepairDate" required>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
 				
@@ -48,7 +50,9 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Planowana data rozpoczęcia naprawy</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" name="plannedRepairDate">
+					<input type="text" class="form-control" placeholder = "YYYY-MM-DD" 
+					pattern = "(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+					name="plannedRepairDate">
 					<span id="helpBlock" class="help-block">[pole opcjonalne]</span>
 				</div>
 			</div>
@@ -56,7 +60,9 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Data rozpoczęcia naprawy</label>
 				<div class="col-sm-10">
-					<input type="text" class="form-control"name = "startRepairDate">
+					<input type="text" class="form-control" placeholder = "YYYY-MM-DD"
+					pattern = "(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])-(?:30))|(?:(?:0[13578]|1[02])-31))"
+					name = "startRepairDate">
 					<span id="helpBlock" class="help-block">[pole opcjonalne]</span>
 				</div>
 			</div>
@@ -98,11 +104,11 @@
 				<label class="col-sm-2 control-label">Status</label>
 				<div class="col-sm-10">
 					<select name = "status" required>
-						<option value="przyjety">Przyjęty</option>
-						<option value="zatwierdzonyKosztNaprawy">Zatwierdzony koszt naprawy</option>
-						<option value="wNaprawie">W naprawie</option>
-						<option value="gotowyDoOdbioru">Gotowy do odbioru</option>
-						<option value="rezygnacja">Rezygnacja</option>
+						<option value="Przyjęty">Przyjęty</option>
+						<option value="Zatwierdzony koszt naprawy">Zatwierdzony koszt naprawy</option>
+						<option value="W naprawie">W naprawie</option>
+						<option value="Gotowy do odbioru">Gotowy do odbioru</option>
+						<option value="Rezygnacja">Rezygnacja</option>
 					</select>
 					<span id="helpBlock" class="help-block">[pole wymagane]</span>
 				</div>
@@ -128,7 +134,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Koszt naprawy dla klienta</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" name = "costForCustomer">
+					<input type="number" step="0.01" min="0.00" placeholder="0,00" class="form-control" name = "costForCustomer">
 					<span id="helpBlock" class="help-block">[pole opcjonalne]</span>
 				</div>
 			</div>
@@ -136,7 +142,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Koszt wykorzystanych części</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" name = "costOfParts">
+					<input type="number" step="0.01" min="0.00" placeholder="0,00" class="form-control" name = "costOfParts">
 					<span id="helpBlock" class="help-block">[pole opcjonalne]</span>
 				</div>
 			</div>
@@ -144,7 +150,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Koszt roboczogodziny</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" name = "manHourCost">
+					<input type="number" step="0.01" min="0.00" placeholder="0,00" class="form-control" name = "manHourCost">
 					<span id="helpBlock" class="help-block">[pole opcjonalne]</span>
 				</div>
 			</div>
@@ -152,7 +158,7 @@
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Ilość roboczogodzin</label>
 				<div class="col-sm-10">
-					<input type="number" class="form-control" name = "manHourQuantity">
+					<input type="number" step="0.01" min="0.00" placeholder="0,00" class="form-control" name = "manHourQuantity">
 					<span id="helpBlock" class="help-block">[pole opcjonalne]</span>
 				</div>
 			</div>

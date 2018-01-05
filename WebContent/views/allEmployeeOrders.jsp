@@ -30,45 +30,54 @@
 
 <body>
 	<br/>
-	<h4>Lista wszystkich pracowników:</h4><br/>
-	${message}
+	&emsp;&emsp;<h4>W tabeli znajduje się lista wszystkich zleceń następującego pracownika:</h4>
+	&emsp;<label> id <input value = "${employee.getIdEmployee()}" readonly></label>
+	&emsp;<label> imię <input value = "${employee.getName()}" readonly></label>
+	&emsp;<label> nazwisko <input value = "${employee.getSurname()}" readonly></label><br/><br/>
 
 		<div class="panel panel-primary">
 			<!-- Table -->
 			<table class="table table-hover">
 				<thead>
-					<tr>
+					<tr align="center" valign="middle">
 						<th>#</th>
-						<th>Imię</th>
-						<th>Nazwisko</th>
-						<th>Telefon komórkowy</th>
-						<th>Notatka</th>
-						<th>Koszt rb/h</th>
-						<th>Adres: ulica</th>
-						<th>Adres: kod pocztowy</th>
-						<th>Adres: miasto</th>
+						<th>Data przyjęcia do naprawy</th>
+						<th>Planowana data rozpoczęcia naprawy</th>
+						<th>Data rozpoczęcia naprawy</th>
+						<th>Obsługujący pracownik</th>
+						<th>Opis problemu</th>
+						<th>Opis naprawy</th>
+						<th>Status</th>
+						<th>Id samochodu</th>
+						<th>Koszt naprawy dla klienta</th>
+						<th>Koszt wykorzystanych części</th>
+						<th>Koszt roboczogodziny</th>
+						<th>Ilość roboczogodzin</th>
 						<th>Akcja</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${employees}" var="employee">
-						<tr>
-							<th>${employee.idEmployee}</th>
-							<td>${employee.name}</td>
-							<td>${employee.surname}</td>
-							<td>${employee.phone}</td>
-							<td>${employee.note}</td>
-							<td>${employee.manHour}</td>
-							<td>${employee.street}</td>
-							<td>${employee.postalCode}</td>
-							<td>${employee.city}</td>
-							<td>
-								<a href='<c:url value = '/DeleteEmployee?idEmployee=${employee.idEmployee}'/>'>usuń</a> / 
-								<a href='<c:url value = '/ModifyEmployee?idEmployee=${employee.idEmployee}'/>'>edytuj</a> / 
-								<a href='<c:url value = '/MixedQuestions?idEmployee=${employee.idEmployee}&action=allEmployeeOrders'/>'>lista zleceń</a>
+					<c:forEach items="${orders}" var="order">
+					<tr>
+						<th>${order.idOrder}</th>
+						<td>${order.acceptanceForRepairDate}</td>
+						<td>${order.plannedRepairDate}</td>
+						<td>${order.startRepairDate}</td>
+						<td>${order.servingEmployeeId}</td>
+						<td>${order.problemDescription}</td>
+						<td>${order.repairDescription}</td>
+						<td>${order.status}</td>
+						<td>${order.repairedVehicleId}</td>
+						<td>${order.costForCustomer}</td>
+						<td>${order.costOfParts}</td>
+						<td>${order.manHourCost}</td>
+						<td>${order.manHourQuantity}</td>
+						<td>
+							<a href='<c:url value = '/DeleteOrder?idOrder=${order.idOrder}'/>'>usuń</a>
+							<a href='<c:url value = '/ModifyOrder?idOrder=${order.idOrder}'/>'>edytuj</a>
 								
-							</td>
-						</tr>
+						</td>
+					</tr>
 					</c:forEach>
 				</tbody>
 			</table>

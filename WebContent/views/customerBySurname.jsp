@@ -29,50 +29,54 @@
 </head>
 
 <body>
-	<br/>
-	<h4>Lista wszystkich pracowników:</h4><br/>
-	${message}
 
-		<div class="panel panel-primary">
-			<!-- Table -->
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>#</th>
-						<th>Imię</th>
-						<th>Nazwisko</th>
-						<th>Telefon komórkowy</th>
-						<th>Notatka</th>
-						<th>Koszt rb/h</th>
-						<th>Adres: ulica</th>
-						<th>Adres: kod pocztowy</th>
-						<th>Adres: miasto</th>
-						<th>Akcja</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${employees}" var="employee">
-						<tr>
-							<th>${employee.idEmployee}</th>
-							<td>${employee.name}</td>
-							<td>${employee.surname}</td>
-							<td>${employee.phone}</td>
-							<td>${employee.note}</td>
-							<td>${employee.manHour}</td>
-							<td>${employee.street}</td>
-							<td>${employee.postalCode}</td>
-							<td>${employee.city}</td>
-							<td>
-								<a href='<c:url value = '/DeleteEmployee?idEmployee=${employee.idEmployee}'/>'>usuń</a> / 
-								<a href='<c:url value = '/ModifyEmployee?idEmployee=${employee.idEmployee}'/>'>edytuj</a> / 
-								<a href='<c:url value = '/MixedQuestions?idEmployee=${employee.idEmployee}&action=allEmployeeOrders'/>'>lista zleceń</a>
-								
-							</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-		</div>
+
+	<form class="form-horizontal"
+		action="../../../Warsztat_samochodowy/MixedQuestions" method="post">
+
+		<br /> &emsp;&emsp;<label>Wpisz nazwisko klienta, którego szukasz: <input type="text" name="surname">
+		</label> 
+		<input type="submit" value="szukaj"><br />
+		<br /> 
+	</form>
+	
+	<c:if test="${pageVisited==true}">
+	<hr/>
+				
+				${message}
+			
+					<div class="panel panel-primary">
+						<!-- Table -->
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>#</th>
+									<th>Imię</th>
+									<th>Nazwisko</th>
+									<th>Data urodzenia</th>
+									<th>Akcja</th>
+								</tr>
+							</thead>
+							<tbody>
+								<c:forEach items="${customers}" var="customer">
+									<tr>
+										<th>${customer.idCustomer}</th>
+										<td>${customer.name}</td>
+										<td>${customer.surname}</td>
+										<td>${customer.birthDay}</td>
+										<td>
+											<a href='<c:url value = '/DeleteCustomer?idCustomer=${customer.idCustomer}'/>'>usuń</a> / 
+											<a href='<c:url value = '/ModifyCustomer?idCustomer=${customer.idCustomer}'/>'>edytuj</a> / 
+											<a href='<c:url value = '/MixedQuestions?idCustomer=${customer.idCustomer}&action=allCustomerVehicles'/>'>lista samochodów</a>
+										</td>
+									</tr>
+								</c:forEach>
+							</tbody>
+						</table>
+					</div>
+			
+				</div>
+	</c:if>
 	</div>
 	<!-- ------------------------------------------------------------------------------------------------------------------------ -->
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

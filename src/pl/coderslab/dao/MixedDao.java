@@ -9,12 +9,14 @@ import java.util.Map;
 
 import pl.coderslab.model.Customer;
 import pl.coderslab.model.DbUtil;
+import pl.coderslab.model.Employee;
+import pl.coderslab.model.Order;
 import pl.coderslab.model.Vehicle;
 
 public class MixedDao {
 
 	private static final String LOAD_CUSTOMERS_ALL_VEHICLES = "SELECT * FROM Customer JOIN Vehicle ON Customer.idCustomer=Vehicle.customerId WHERE Customer.idCustomer=?";
-
+	private static final String LOAD_EMPLOYEE_ALL_ORDERS = "SELECT * FROM Employee JOIN `Order` ON Employee.idEmployee=`Order`.servingEmployeeId WHERE Employee.idEmployee=?";
 	
 	
 	public Map<Customer, Vehicle>  loadCustomersAllVehicles(int id) {
@@ -52,4 +54,51 @@ public class MixedDao {
 		}
 		return customerAllVehicles;
 	}
+	
+	public Map<Employee, Order>  loadEmployeeAllOrders(int id) {
+
+		Map<Employee, Order>  employeeAllOrders = new HashMap<>();
+
+		try (Connection conn = DbUtil.getConnection()) {
+			PreparedStatement statement = conn.prepareStatement(LOAD_EMPLOYEE_ALL_ORDERS);
+			statement.setInt(1, id);
+			ResultSet rs = statement.executeQuery();
+
+			while (rs.next()) {
+				Employee e = new Employee();
+				e.setIdEmployee(rs.getInt("idEmployee"));
+				e.setName(rs.getString("name"));
+				e.setSurname(rs.getString("surname"));
+				e.setPhone(rs.getString("phone"));
+				e.setNote(rs.getString("note"));
+				e.setManHour(rs.getDouble("manHour"));
+				e.setStreet(rs.getString("street"));
+				e.setPostalCode(rs.getString("postalCode"));
+				e.setCity(rs.getString("city"));	
+				
+				Order o = new Order();
+				o.setIdOrder(rs.getInt("idOrder"));
+				o.setAcceptanceForRepairDate(rs.getString("acceptanceForRepairDate"));
+				o.setPlannedRepairDate(rs.getString("plannedRepairDate"));
+				o.setStartRepairDate(rs.getString("startRepairDate"));
+				o.setServingEmployeeId(rs.getInt("servingEmployeeId"));
+				o.setProblemDescription(rs.getString("problemDescription"));
+				o.setRepairDescription(rs.getString("repairDescription"));
+				o.setStatus(rs.getString("status"));
+				o.setRepairedVehicleId(rs.getInt("repairedVehicleId"));
+				o.setCostForCustomer(rs.getDouble("costForCustomer"));
+				o.setCostOfParts(rs.getDouble("costOfParts"));
+				o.setManHourCost(rs.getDouble("manHourCost"));
+				o.setManHourQuantity(rs.getDouble("manHourQuantity"));
+
+				employeeAllOrders.put(e, o);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			System.out.println("Coś nie tak :(");
+		}
+		return employeeAllOrders;
+	}
+	
+	
 }

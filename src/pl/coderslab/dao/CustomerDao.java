@@ -13,7 +13,7 @@ import pl.coderslab.model.DbUtil;
 public class CustomerDao {
 
 	private static final String LOAD_ALL_CUSTOMERS = "SELECT * FROM Customer";
-	private static final String LOAD_ONE_BY_ID = "SELECT * FROM Customer where idCustomer=?";
+	private static final String LOAD_ALL_BY_SURNAME = "SELECT * FROM Customer where surname=?";
 	private static final String DELETE_ONE_BY_ID = "DELETE FROM Customer where idCustomer=?";
 	private static final String SAVE_NEW = "INSERT INTO Customer(name, surname, birthDay) VALUES (?,?,?)";
 	private static final String UPDATE_BY_ID = "UPDATE Customer SET name=?, surname=?, birthDay=? WHERE idCustomer=?";
@@ -47,32 +47,62 @@ public class CustomerDao {
 	}
 	
 	/**
-	 * Load one customer by id.
-	 * @param idCustomer
-	 * @return customer
+	 * Load list all customers with the same surname.
+	 * @param surname
+	 * @return List of Customers
 	 */
-	public Customer loadOneById(int idCustomer) {
+	public List<Customer> loadAllBySurname(String surname) {
 
+		List<Customer> customers = new ArrayList<>();
 		try (Connection conn = DbUtil.getConnection()) {
 
-			PreparedStatement statement = conn.prepareStatement(LOAD_ONE_BY_ID);
-			statement.setInt(1, idCustomer);
+			PreparedStatement statement = conn.prepareStatement(LOAD_ALL_BY_SURNAME);
+			statement.setString(1, surname);
 			ResultSet rs = statement.executeQuery();
 
-			Customer customer = new Customer();
-			customer.setIdCustomer(rs.getInt("idCustomer"));
-			customer.setName(rs.getString("name"));
-			customer.setSurname(rs.getString("surname"));
-			customer.setBirthDay(rs.getString("birthDay"));
-
-			return customer;
-
+			while (rs.next()) {
+				Customer c = new Customer();
+				c.setIdCustomer(rs.getInt("idCustomer"));
+				c.setName(rs.getString("name"));
+				c.setSurname(rs.getString("surname"));
+				c.setBirthDay(rs.getString("birthDay"));
+				customers.add(c);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Coś nie tak :(");
 		}
-		return null;
+		return customers;
 	}
+	
+	
+//	/**
+//	 * Load one customer by Surname.
+//	 * @param surname
+//	 * @return Customer
+//	 */
+//	public Customer loadOneBySurname(String surname) {
+//
+//		try (Connection conn = DbUtil.getConnection()) {
+//
+//			PreparedStatement statement = conn.prepareStatement(LOAD_ONE_BY_SURNAME);
+//			statement.setString(1, surname);
+//			ResultSet rs = statement.executeQuery();
+//
+//			Customer customer = new Customer();
+//			customer.setIdCustomer(rs.getInt("idCustomer"));
+//			customer.setName(rs.getString("name"));
+//			customer.setSurname(rs.getString("surname"));
+//			customer.setBirthDay(rs.getString("birthDay"));
+//
+//			return customer;
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//			System.out.println("Coś nie tak :(");
+//		}
+//		return null;
+//	}
 	
 	/**
 	 * Save customer to Data Base.

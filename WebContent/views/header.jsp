@@ -17,6 +17,7 @@
 		    <ul class="dropdown-menu">
 		      <li><a href="../../../Warsztat_samochodowy/AllCustomers">Lista wszystkich klientów</a></li>
 		      <li><a href="../../Warsztat_samochodowy/views/addCustomer.jsp">Dodaj nowego klienta</a></li>
+		      <li><a href="../../Warsztat_samochodowy/views/customerBySurname.jsp">Wyszukaj klienta po nazwisku</a></li>
 		    </ul>
 	 </li>
   

@@ -53,11 +53,9 @@
 							<td>${customer.surname}</td>
 							<td>${customer.birthDay}</td>
 							<td>
-								<a href='<c:url value = '/DeleteCustomer?idCustomer=${customer.idCustomer}'/>'>usuń</a>
-								 / 
-								<a href='<c:url value = '/ModifyCustomer?idCustomer=${customer.idCustomer}'/>'>edytuj</a>
-								 / 
-								<a href='<c:url value = '/AllCustomerVehicles?idCustomer=${customer.idCustomer}'/>'>lista samochodów</a>
+								<a href='<c:url value = '/DeleteCustomer?idCustomer=${customer.idCustomer}'/>'>usuń</a> / 
+								<a href='<c:url value = '/ModifyCustomer?idCustomer=${customer.idCustomer}'/>'>edytuj</a> / 
+								<a href='<c:url value = '/MixedQuestions?idCustomer=${customer.idCustomer}&action=allCustomerVehicles'/>'>lista samochodów</a>
 							</td>
 						</tr>
 					</c:forEach>
