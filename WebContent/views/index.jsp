@@ -23,10 +23,48 @@
     <![endif]-->
 </head>
 <body>
-	<h2>Witaj, masz szczęście!</h2>
-	<h2>Korzystasz z najlepszego na świecie systemu CRM warsztatu samochodowego ;-)!</h2><br/>
+	<img src="../../../Warsztat_samochodowy/images/car.png"  width="250" height="195" alt="RepairShop" align="right"><br/>
+	<hr/>
+	<h3>★·.·´¯`·.·★ 🚙 Witamy w serwisie wasztatu samochodowego 🚗 ★·.·´¯`·.·★</h3>
+	<hr/>
 	
-	<img src="../images/car.png" alt="RepairShop"><br/>
+	&emsp;&emsp;<h4>Oto lista aktualnie prowadzonych napraw:</h4><br/>
+
+		<div class="panel panel-primary">
+			<!-- Table -->
+			<table class="table table-hover">
+				<thead>
+					<tr align="center" valign="middle">
+						<th>#</th>
+						<th>Data przyjęcia do naprawy</th>
+						<th>Data rozpoczęcia naprawy</th>
+						<th>Obsługujący pracownik</th>
+						<th>Opis problemu</th>
+						<th>Opis naprawy</th>
+						<th>Id samochodu</th>
+						<th>Akcja</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${actualOrders}" var="order">
+					<tr>
+						<th>${order.idOrder}</th>
+						<td>${order.acceptanceForRepairDate}</td>
+						<td>${order.startRepairDate}</td>
+						<td>${order.servingEmployeeId}</td>
+						<td>${order.problemDescription}</td>
+						<td>${order.repairDescription}</td>
+						<td>${order.repairedVehicleId}</td>
+						<td>
+							<a href='<c:url value = '/DeleteOrder?idOrder=${order.idOrder}'/>'>usuń</a> / 
+							<a href='<c:url value = '/ModifyOrder?idOrder=${order.idOrder}'/>'>edytuj</a> /
+							<a href='<c:url value = '/OrderById?idOrder=${order.idOrder}'/>'>szczegóły</a>
+						</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 	<script

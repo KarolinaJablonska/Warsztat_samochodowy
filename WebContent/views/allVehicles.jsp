@@ -59,9 +59,9 @@
 							<td>${vehicle.nextTechnicalReviewDate}</td>
 							<td>${vehicle.customerId}</td>
 							<td>
-								<a href='<c:url value = '/DeleteVehicle?idVehicle=${vehicle.idVehicle}'/>'>usuń</a>
-								<a href='<c:url value = '/ModifyVehicle?idVehicle=${vehicle.idVehicle}'/>'>edytuj</a>
-								
+								<a href='<c:url value = '/DeleteVehicle?idVehicle=${vehicle.idVehicle}'/>'>usuń</a> /
+								<a href='<c:url value = '/ModifyVehicle?idVehicle=${vehicle.idVehicle}'/>'>edytuj</a> / 
+								<a href='<c:url value = '/MixedQuestions?idVehicle=${vehicle.idVehicle}&action=vehicleOrderHistory'/>'>historia zleceń</a>
 							</td>
 						</tr>
 					</c:forEach>

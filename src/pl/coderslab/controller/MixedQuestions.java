@@ -12,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.coderslab.dao.CustomerDao;
 import pl.coderslab.dao.MixedDao;
 import pl.coderslab.model.Customer;
 import pl.coderslab.model.Employee;
@@ -49,7 +48,7 @@ public class MixedQuestions extends HttpServlet {
 			getServletContext().getRequestDispatcher("/views/allCustomerVehicles.jsp").forward(request, response);
 		}
 
-		// ALL EMPLOYEES ORDERS
+		// ALL EMPLOYEE ORDERS
 		if (action.equals("allEmployeeOrders")) {
 			id = Integer.parseInt(request.getParameter("idEmployee"));
 			Map<Employee, Order> employeeAllOrders = dao.loadEmployeeAllOrders(id);
@@ -64,34 +63,37 @@ public class MixedQuestions extends HttpServlet {
 			request.setAttribute("employee", employee);
 			getServletContext().getRequestDispatcher("/views/allEmployeeOrders.jsp").forward(request, response);
 		}
-	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		
-		String NO_RECORD = "<div class=\"alert alert-danger alert-dismissable\">\n"
-				+ "  <button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>\n"
-				+ "  W BAZIE NIE DANYCH O PODANYCH KRYTERIACH. \n" + "</div>";
-		
-		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html");
-		
-		String surname = request.getParameter("surname");
-		boolean pageVisited = true;
-		List<Customer> customers;
-		CustomerDao dao = new CustomerDao();
-		
-		try {
-			customers = dao.loadAllBySurname(surname);
-			request.setAttribute("customers", customers);
-		} catch (Exception e) {
-			request.setAttribute("message", NO_RECORD);
+		// ALL ACTUAL EMPLOYEE ORDERS
+		if (action.equals("allActualEmployeeOrders")) {
+			id = Integer.parseInt(request.getParameter("idEmployee"));
+			Map<Employee, Order> employeeAllActualOrders = dao.loadEmployeeAllActualOrders(id);
+			Set<Employee> employees = employeeAllActualOrders.keySet();
+			Employee employee = employees.iterator().next();
+
+			List<Order> orders = new ArrayList<>();
+			for (Order lis : employeeAllActualOrders.values()) {
+				orders.add(lis);
+			}
+			request.setAttribute("orders", orders);
+			request.setAttribute("employee", employee);
+			getServletContext().getRequestDispatcher("/views/index.jsp").forward(request, response);
 		}
-		
-		request.setAttribute("pageVisited", pageVisited);
-		getServletContext().getRequestDispatcher("/views/customerBySurname.jsp").forward(request, response);
-		
-		
-	}
 
+		// ALL VEHICLE ORDERS
+		if (action.equals("vehicleOrderHistory")) {
+			id = Integer.parseInt(request.getParameter("idVehicle"));
+			Map<Vehicle, Order> vehicleAllOrders = dao.loadVehicleAllOrders(id);
+			Set<Vehicle> vehicles = vehicleAllOrders.keySet();
+			Vehicle vehicle = vehicles.iterator().next();
+
+			List<Order> orders = new ArrayList<>();
+			for (Order lis : vehicleAllOrders.values()) {
+				orders.add(lis);
+			}
+			request.setAttribute("orders", orders);
+			request.setAttribute("vehicle", vehicle);
+			getServletContext().getRequestDispatcher("/views/allVehicleOrders.jsp").forward(request, response);
+		}
+	}
 }

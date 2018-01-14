@@ -9,22 +9,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import pl.coderslab.dao.EmployeeDao;
-import pl.coderslab.model.Employee;
+import pl.coderslab.dao.OrderDao;
+import pl.coderslab.model.Order;
 
-@WebServlet("/AllEmployees")
-public class AllEmployees extends HttpServlet {
+@WebServlet("/AllActualOrders")
+public class AllActualOrders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		EmployeeDao dao = new EmployeeDao();
-		List<Employee> employees;
-
-		employees = dao.loadAll();
-		request.setAttribute("employees", employees);
+		
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");
-		getServletContext().getRequestDispatcher("/views/allEmployees.jsp").forward(request, response);
+		
+		OrderDao dao = new OrderDao();
+		List<Order> actualOrders = dao.loadAllActualOrders();
+		request.setAttribute("actualOrders", actualOrders);
+		getServletContext().getRequestDispatcher("/views/index.jsp").forward(request, response);
 	}
+
 }

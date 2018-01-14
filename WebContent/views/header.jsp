@@ -9,7 +9,7 @@
 
  
 <ul class="nav nav-pills">
-  <li role="presentation" class="active"><a href="../../Warsztat_samochodowy/views/index.jsp">Strona główna</a></li> 
+  <li role="presentation" class="active"><a href="../../../Warsztat_samochodowy/AllActualOrders">Strona główna</a></li> 
 
   <!-- Rozwijalne menu Klienci -->
   <li class="dropdown, active">
@@ -47,6 +47,7 @@
 		    <ul class="dropdown-menu">
 		      <li><a href="../../../Warsztat_samochodowy/AllOrders">Lista wszystkich zleceń</a></li>
 		      <li><a href="../../../Warsztat_samochodowy/SupportValuesToForms?action=addOrder">Dodaj nowe zlecenie</a></li>
+		      <li><a href="../../Warsztat_samochodowy/SupportValuesToForms?action=oneOrderById">Wyszukaj zlecenie po nr id</a></li>
 		    </ul>
  </li>
   

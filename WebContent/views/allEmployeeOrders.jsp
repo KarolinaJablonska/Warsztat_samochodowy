@@ -30,7 +30,7 @@
 
 <body>
 	<br/>
-	&emsp;&emsp;<h4>W tabeli znajduje się lista wszystkich zleceń następującego pracownika:</h4>
+	&emsp;&emsp;<h4>W tabeli znajduje się lista wszystkich aktualnych zleceń następującego pracownika:</h4>
 	&emsp;<label> id <input value = "${employee.getIdEmployee()}" readonly></label>
 	&emsp;<label> imię <input value = "${employee.getName()}" readonly></label>
 	&emsp;<label> nazwisko <input value = "${employee.getSurname()}" readonly></label><br/><br/>

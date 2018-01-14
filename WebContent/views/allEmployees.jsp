@@ -65,7 +65,8 @@
 							<td>
 								<a href='<c:url value = '/DeleteEmployee?idEmployee=${employee.idEmployee}'/>'>usuń</a> / 
 								<a href='<c:url value = '/ModifyEmployee?idEmployee=${employee.idEmployee}'/>'>edytuj</a> / 
-								<a href='<c:url value = '/MixedQuestions?idEmployee=${employee.idEmployee}&action=allEmployeeOrders'/>'>lista zleceń</a>
+								<a href='<c:url value = '/MixedQuestions?idEmployee=${employee.idEmployee}&action=allActualEmployeeOrders'/>'>aktualne zlecenia</a> / 
+								<a href='<c:url value = '/MixedQuestions?idEmployee=${employee.idEmployee}&action=allEmployeeOrders'/>'>historia zleceń</a>
 								
 							</td>
 						</tr>

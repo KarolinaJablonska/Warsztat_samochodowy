@@ -30,7 +30,7 @@
 
 <body>
 	<br/>
-	<h4>Lista wszystkich zamówień:</h4><br/>
+	<h4>Lista zleceń:</h4><br/>
 	${message}
 
 		<div class="panel panel-primary">

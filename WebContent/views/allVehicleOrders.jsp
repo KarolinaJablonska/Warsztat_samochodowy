@@ -29,56 +29,60 @@
 </head>
 
 <body>
+	<br/>
+	&emsp;&emsp;<h4>W tabeli znajduje się lista wszystkich zleceń przypisanych do następującego pojazdu:</h4>
+	&emsp;<label> id <input value = "${vehicle.getIdVehicle()}" readonly></label>
+	&emsp;<label> model <input value = "${vehicle.getModel()}" readonly></label>
+	&emsp;<label> marka <input value = "${vehicle.getMark()}" readonly></label>
+	&emsp;<label> nr rej <input value = "${vehicle.getRegistrationNr()}" readonly></label><br/><br/>
 
-
-	<form class="form-horizontal"
-		action="../../../Warsztat_samochodowy/CustomerBySurname" method="post">
-
-		<br /> &emsp;&emsp;<label>Wpisz nazwisko klienta, którego szukasz: <input type="text" name="surname">
-		</label> 
-		<input type="submit" value="szukaj"><br />
-		<br /> 
-	</form>
-	
-	<c:if test="${pageVisited==true}">
-	<hr/>
-		<c:if test="${record==false}">		
-				${message}
-		</c:if>
-		<c:if test="${record==true}">		
-					<div class="panel panel-primary">
-						<!-- Table -->
-						<table class="table table-hover">
-							<thead>
-								<tr>
-									<th>#</th>
-									<th>Imię</th>
-									<th>Nazwisko</th>
-									<th>Data urodzenia</th>
-									<th>Akcja</th>
-								</tr>
-							</thead>
-							<tbody>
-								<c:forEach items="${customers}" var="customer">
-									<tr>
-										<th>${customer.idCustomer}</th>
-										<td>${customer.name}</td>
-										<td>${customer.surname}</td>
-										<td>${customer.birthDay}</td>
-										<td>
-											<a href='<c:url value = '/DeleteCustomer?idCustomer=${customer.idCustomer}'/>'>usuń</a> / 
-											<a href='<c:url value = '/ModifyCustomer?idCustomer=${customer.idCustomer}'/>'>edytuj</a> / 
-											<a href='<c:url value = '/MixedQuestions?idCustomer=${customer.idCustomer}&action=allCustomerVehicles'/>'>lista samochodów</a>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</div>
-			
-				</div>
-		</c:if>
-		</c:if>
+		<div class="panel panel-primary">
+			<!-- Table -->
+			<table class="table table-hover">
+				<thead>
+					<tr align="center" valign="middle">
+						<th>#</th>
+						<th>Data przyjęcia do naprawy</th>
+						<th>Planowana data rozpoczęcia naprawy</th>
+						<th>Data rozpoczęcia naprawy</th>
+						<th>Obsługujący pracownik</th>
+						<th>Opis problemu</th>
+						<th>Opis naprawy</th>
+						<th>Status</th>
+						<th>Id samochodu</th>
+						<th>Koszt naprawy dla klienta</th>
+						<th>Koszt wykorzystanych części</th>
+						<th>Koszt roboczogodziny</th>
+						<th>Ilość roboczogodzin</th>
+						<th>Akcja</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${orders}" var="order">
+					<tr>
+						<th>${order.idOrder}</th>
+						<td>${order.acceptanceForRepairDate}</td>
+						<td>${order.plannedRepairDate}</td>
+						<td>${order.startRepairDate}</td>
+						<td>${order.servingEmployeeId}</td>
+						<td>${order.problemDescription}</td>
+						<td>${order.repairDescription}</td>
+						<td>${order.status}</td>
+						<td>${order.repairedVehicleId}</td>
+						<td>${order.costForCustomer}</td>
+						<td>${order.costOfParts}</td>
+						<td>${order.manHourCost}</td>
+						<td>${order.manHourQuantity}</td>
+						<td>
+							<a href='<c:url value = '/DeleteOrder?idOrder=${order.idOrder}'/>'>usuń</a>
+							<a href='<c:url value = '/ModifyOrder?idOrder=${order.idOrder}'/>'>edytuj</a>
+								
+						</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
 	</div>
 	<!-- ------------------------------------------------------------------------------------------------------------------------ -->
 	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

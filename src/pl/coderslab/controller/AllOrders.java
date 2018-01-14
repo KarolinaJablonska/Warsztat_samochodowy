@@ -19,9 +19,8 @@ public class AllOrders extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		OrderDao dao = new OrderDao();
-		List<Order> orders;
+		List<Order> orders = dao.loadAll();
 
-		orders = dao.loadAll();
 		request.setAttribute("orders", orders);
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html");

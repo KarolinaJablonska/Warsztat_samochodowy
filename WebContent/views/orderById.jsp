@@ -32,11 +32,21 @@
 
 
 	<form class="form-horizontal"
-		action="../../../Warsztat_samochodowy/CustomerBySurname" method="post">
-
-		<br /> &emsp;&emsp;<label>Wpisz nazwisko klienta, którego szukasz: <input type="text" name="surname">
-		</label> 
-		<input type="submit" value="szukaj"><br />
+		action="../../../Warsztat_samochodowy/OrderById" method="post"><br />
+		 &emsp;&emsp;<label>Wybierz nr id zlecenia, którego szczegóły chcesz zobaczyć:<br/><br/>
+		 	<select name = "idOrder" required>
+						<c:forEach items="${orders}" var="order">
+							<option value="${order.idOrder}">
+									id: ${order.idOrder} |  
+									data przyjęcia: ${order.acceptanceForRepairDate} | 
+									obsługujący pracownik: ${order.servingEmployeeId} |  
+									status: ${order.status} |  
+									pojazd: ${order.repairedVehicleId}
+							</option>	
+						</c:forEach>
+					</select>
+		 </label> <br/>
+		&emsp;&emsp;<input type="submit" value="szukaj"><br />
 		<br /> 
 	</form>
 	
@@ -52,26 +62,42 @@
 							<thead>
 								<tr>
 									<th>#</th>
-									<th>Imię</th>
-									<th>Nazwisko</th>
-									<th>Data urodzenia</th>
+									<th>Data przyjęcia do naprawy</th>
+									<th>Planowana data rozpoczęcia naprawy</th>
+									<th>Data rozpoczęcia naprawy</th>
+									<th>Obsługujący pracownik</th>
+									<th>Opis problemu</th>
+									<th>Opis naprawy</th>
+									<th>Status</th>
+									<th>Id samochodu</th>
+									<th>Koszt naprawy dla klienta</th>
+									<th>Koszt wykorzystanych części</th>
+									<th>Koszt roboczogodziny</th>
+									<th>Ilość roboczogodzin</th>
 									<th>Akcja</th>
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach items="${customers}" var="customer">
 									<tr>
-										<th>${customer.idCustomer}</th>
-										<td>${customer.name}</td>
-										<td>${customer.surname}</td>
-										<td>${customer.birthDay}</td>
+										<th>${order.idOrder}</th>
+										<td>${order.acceptanceForRepairDate}</td>
+										<td>${order.plannedRepairDate}</td>
+										<td>${order.startRepairDate}</td>
+										<td>${order.servingEmployeeId}</td>
+										<td>${order.problemDescription}</td>
+										<td>${order.repairDescription}</td>
+										<td>${order.status}</td>
+										<td>${order.repairedVehicleId}</td>
+										<td>${order.costForCustomer}</td>
+										<td>${order.costOfParts}</td>
+										<td>${order.manHourCost}</td>
+										<td>${order.manHourQuantity}</td>
 										<td>
-											<a href='<c:url value = '/DeleteCustomer?idCustomer=${customer.idCustomer}'/>'>usuń</a> / 
-											<a href='<c:url value = '/ModifyCustomer?idCustomer=${customer.idCustomer}'/>'>edytuj</a> / 
-											<a href='<c:url value = '/MixedQuestions?idCustomer=${customer.idCustomer}&action=allCustomerVehicles'/>'>lista samochodów</a>
+											<a href='<c:url value = '/DeleteOrder?idOrder=${order.idOrder}'/>'>usuń</a>
+											<a href='<c:url value = '/ModifyOrder?idOrder=${order.idOrder}'/>'>edytuj</a>
+											
 										</td>
 									</tr>
-								</c:forEach>
 							</tbody>
 						</table>
 					</div>
