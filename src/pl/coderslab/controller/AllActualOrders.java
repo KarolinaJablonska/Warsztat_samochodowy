@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import pl.coderslab.dao.OrderDao;
 import pl.coderslab.model.Order;
 
-@WebServlet("/AllActualOrders")
+@WebServlet("/")
 public class AllActualOrders extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
