@@ -1,6 +1,6 @@
 ## Warsztat_samochodowy
 
-### FUNCTIONALITY (actualization 8.02.2018)
+### FUNCTIONALITY (actualization 9.02.2018)
 
 CRM (Customer Relationship Management) web application for the car Workshop.
 Its dedicated for its employees.
@@ -17,12 +17,12 @@ Functionality:
 [ Java, Servlets, JSP, DAO, SQL]
 
 
-### DATABASE (actualization 8.02.2018)
+### DATABASE (actualization 9.02.2018)
 
 <img src="WebContent/printscreens/1.png">
 
 
-### PRINTSCREENS (actualization 8.02.2018)
+### PRINTSCREENS (actualization 9.02.2018)
 <img src="WebContent/printscreens/2.png">
 <img src="WebContent/printscreens/3.png">
 <img src="WebContent/printscreens/4.png">
